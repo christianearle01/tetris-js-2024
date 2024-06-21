@@ -167,39 +167,7 @@ $(document).ready(function() {
 
     function moveTetrominoY(y_movement) {
         if(y_movement === 'arrow_down'){
-            const is_block_collide_downward = isCollide('block_collision', 'down');
-
-            if(tetromino_coords[1].y < 2 && is_block_collide_downward){
-                clearInterval(timer_drop);
-                enanbled_controller = false;
-                setTimeout(() => {
-                    if(window.confirm('Game Over')){
-                        resetGame();
-                    }
-                }, 500);
-            }
-            else if(isCollide('land_collision') || is_block_collide_downward){
-                clearInterval(timer_drop);
-                enanbled_controller = false;
-                
-                setTimeout(() => {
-                    clearFilledLines();
-                    generateTetromino();
-                }, 500);
-            }
-            else{
-                /* Reset the Tetromino of the previous Tetromino coordinates */
-                resetTetrominoBlocks();
-    
-                tetromino_coords.map(tetromino => {
-                    tetromino.y += 1;
-                });
-    
-                /* Updated tetromino_coords to move the tetromino */
-                newTetrominoBlocks();
-                score += 4;
-                $(`#score`).text(score);
-            }
+            downwardTetromino();
         }
         else if(y_movement === 'arrow_up'){
             tetrominoRotation(curr_tetromino);
@@ -207,42 +175,45 @@ $(document).ready(function() {
     }
 
     function hardDrop() {
-        for(let ctr = 0; ctr < tetris_grid.length; ctr++){
-            const is_block_collide_downward = isCollide('block_collision', 'down');
+        for(let ctr = 0; (ctr < tetris_grid.length) && (enanbled_controller === true); ctr++){
+            downwardTetromino('hard_drop');
+        }
+    }
 
-            if(tetromino_coords[1].y < 2 && is_block_collide_downward){
-                clearInterval(timer_drop);
-                enanbled_controller = false;
-                setTimeout(() => {
-                    if(window.confirm('Game Over')){
-                        resetGame();
-                    }
-                }, 500);
-            }
-            else if(isCollide('land_collision') || is_block_collide_downward){
-                clearInterval(timer_drop);
-                enanbled_controller = false;
-                
-                setTimeout(() => {
-                    clearFilledLines();
-                    generateTetromino();
-                }, 500);
+    function downwardTetromino(drop_type = 'soft_drop') {
+        const is_block_collide_downward = isCollide('block_collision', 'down');
 
-                break;
-            }
-            else{
-                /* Reset the Tetromino of the previous Tetromino coordinates */
-                resetTetrominoBlocks();
+        if(tetromino_coords[1].y < 2 && is_block_collide_downward){
+            clearInterval(timer_drop);
+            enanbled_controller = false;
+            setTimeout(() => {
+                if(window.confirm('Game Over')){
+                    resetGame();
+                }
+            }, 500);
+        }
+        else if(isCollide('land_collision') || is_block_collide_downward){
+            clearInterval(timer_drop);
+            enanbled_controller = false;
+            
+            setTimeout(() => {
+                clearFilledLines();
+                generateTetromino();
+            }, 500);
+        }
+        else{
+            /* Reset the Tetromino of the previous Tetromino coordinates */
+            resetTetrominoBlocks();
 
-                tetromino_coords.map(tetromino => {
-                    tetromino.y += 1;
-                });
+            tetromino_coords.map(tetromino => {
+                tetromino.y += 1;
+            });
 
-                /* Updated tetromino_coords to move the tetromino */
-                newTetrominoBlocks();
-                score += 8;
-                $(`#score`).text(score);
-            }
+            /* Updated tetromino_coords to move the tetromino */
+            newTetrominoBlocks();
+
+            score += (drop_type === 'soft_drop') ? 4 : 8;
+            $(`#score`).text(score);
         }
     }
 
