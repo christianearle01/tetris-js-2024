@@ -1,0 +1,71 @@
+.tetris-grid-container {
+    display: flex;
+    justify-content: center; /* Centers the grid horizontally */
+    align-items: center;     /* Centers the grid vertically */
+    height: 100vh;           /* Full height of the viewport */
+    background-color: #000;  /* Background color for the container */
+}
+
+.tetris-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 30px); /* 10 columns, each 30px wide */
+    grid-template-rows: repeat(20, 30px);    /* 20 rows, each 30px high */
+    gap: 1px; /* Small gap between cells */
+    background-color: #000; /* Background color for the grid */
+    padding: 5px; /* Padding around the grid */
+    border: 2px solid #333; /* Border around the grid */
+}
+
+.row {
+    display: contents;
+}
+
+.cell {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #555; /* Border for each cell */
+}
+
+/* Square Colors:  background colors for the squares.*/
+.default-color {
+    background-color: #eaeaea; /* Default color for empty cells */
+}
+.i-color {
+    background-color: #66ccff;
+}
+.o-color {
+    background-color: #fff200;
+}
+.s-color {
+    background-color: #00ff00;
+}
+.z-color {
+    background-color: #ff0000;
+}
+.l-color {
+    background-color: hwb(36 6% 5%);
+}
+.j-color {
+    background-color: #0000ff;
+}
+.t-color {
+    background-color: #cc00ff;
+}
+
+.score-container > h2{
+    margin: 0;
+    font-size: 24px;
+}
+
+.score-container {
+    border-radius: 7px;
+    width: 110px;
+    height: 10vh;
+    padding: 5px;
+    margin-right: 40px;
+    margin-bottom: 530px;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
