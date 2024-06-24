@@ -684,27 +684,7 @@ $(document).ready(function() {
                 x_ctr = - 2;
             }
         }
-        else if(shape === 's'){
-            /* Left Wall - is block leaning the left wall checker */
-            if(tetromino_coords[1].x === 0 && curr_rotation === shape_rotations[h_down]){
-                x_ctr = 1;
-            }
-            /* Right Wall - is block leaning the right wall checker */
-            else if(tetromino_coords[1].x === 9 && curr_rotation === shape_rotations[h_up]){
-                x_ctr = - 1;
-            }
-        }
-        else if(shape === 'z'){
-            /* Left Wall - is block leaning the left wall checker */
-            if (tetromino_coords[2].x === 0 && curr_rotation === shape_rotations[h_down]) {
-                x_ctr = 1;
-            }
-            /* Right Wall - is block leaning the right wall checker */
-            else if(tetromino_coords[2].x === 9 && curr_rotation === shape_rotations[h_up]){
-                x_ctr = - 1;
-            }
-        }
-        else if(shape === 'j'){
+        else if(['z', 'j'].includes(shape)){
             /* Left Wall - is block leaning the left wall checker */
             if(tetromino_coords[2].x === 0 && curr_rotation === shape_rotations[h_down]){
                 x_ctr = 1;
@@ -714,17 +694,7 @@ $(document).ready(function() {
                 x_ctr = - 1;
             }
         }
-        else if(shape === 'l'){
-            /* Left Wall - is block leaning the left wall checker */
-            if(tetromino_coords[1].x === 0 && curr_rotation === shape_rotations[h_down]){
-                x_ctr = 1;
-            }
-            /* Right Wall - is block leaning the right wall checker */
-            else if(tetromino_coords[1].x === 9 && curr_rotation === shape_rotations[h_up]){
-                x_ctr = - 1;
-            }
-        }
-        else if(shape === 't'){
+        else if(['s', 'l', 't'].includes(shape)){
             /* Left Wall - is block leaning the left wall checker */
             if(tetromino_coords[1].x === 0 && curr_rotation === shape_rotations[h_down]){
                 x_ctr = 1;
