@@ -40,7 +40,7 @@ $(document).ready(function() {
     let tetromino_color = '';
     let tetromino_coords = [];
     let tetromino_rotation = '';
-    let enanbled_controller = false;
+    let enabled_controller = false;
     let score = 0;
 
     /* randomize to generate tetromino */
@@ -68,7 +68,7 @@ $(document).ready(function() {
     }
 
     $(document).keydown(function(e){
-        if(enanbled_controller){
+        if(enabled_controller){
             switch (e.which){ 
                 case keydown.ArrowLeft:
                     moveTetrominoX('arrow_left');
@@ -113,7 +113,7 @@ $(document).ready(function() {
     }
 
     function generateTetromino() {
-        enanbled_controller = true;
+        enabled_controller = true;
         curr_tetromino = randomTetromino();
         tetromino_color = shape_colors[curr_tetromino];
         tetromino_rotation = shape_rotations[0];
@@ -175,7 +175,7 @@ $(document).ready(function() {
     }
 
     function hardDrop() {
-        for(let ctr = 0; (ctr < tetris_grid.length) && (enanbled_controller === true); ctr++){
+        for(let ctr = 0; (ctr < tetris_grid.length) && (enabled_controller === true); ctr++){
             downwardTetromino('hard_drop');
         }
     }
@@ -185,7 +185,7 @@ $(document).ready(function() {
 
         if(tetromino_coords[1].y < 2 && is_block_collide_downward){
             clearInterval(timer_drop);
-            enanbled_controller = false;
+            enabled_controller = false;
             setTimeout(() => {
                 if(window.confirm('Game Over')){
                     resetGame();
@@ -194,7 +194,7 @@ $(document).ready(function() {
         }
         else if(isCollide('land_collision') || is_block_collide_downward){
             clearInterval(timer_drop);
-            enanbled_controller = false;
+            enabled_controller = false;
             
             setTimeout(() => {
                 clearFilledLines();
@@ -251,7 +251,7 @@ $(document).ready(function() {
         }
         else if(collision_type === 'block_collision'){
             let coords_key_arr = [];
-            let coord_checker = { y: 0, x: 0 }
+            let coord_checker = { y: 0, x: 0 };
             tetromino_coords.forEach(coord => {
                 coords_key_arr.push(`${coord.y}-${coord.x}`);
             });
